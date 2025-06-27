@@ -1,0 +1,35 @@
+version: 2.1
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - checkout
+      - run:
+          name: Set up Python & install dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+            playwright install
+      - run:
+          name: Run Playwright tests
+          command: |
+            . venv/bin/activate
+            pytest tests/ --html=report.html --self-contained-html
+      - store_artifacts:
+          path: report.html
+          destination: test-report
+
+workflows:
+  scheduled-tests:
+    triggers:
+      - schedule:
+          cron: "0 */6 * * *"  # Every 6 hours
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - run-tests
