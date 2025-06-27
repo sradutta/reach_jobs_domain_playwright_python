@@ -26,7 +26,7 @@ workflows:
   scheduled-tests:
     triggers:
       - schedule:
-          cron: "0 */6 * * *"  # Every 6 hours
+          cron: "*/10 * * * *"  # Every 6 hours
           filters:
             branches:
               only:
