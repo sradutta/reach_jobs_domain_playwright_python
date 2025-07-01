@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/reach_jobs_domain_playwright_python.iml" filepath="$PROJECT_DIR$/.idea/reach_jobs_domain_playwright_python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/reach_jobs_domain_playwright_python_with_jenkins.iml" filepath="$PROJECT_DIR$/.idea/reach_jobs_domain_playwright_python_with_jenkins.iml" />
     </modules>
   </component>
 </project>

@@ -1,5 +1,8 @@
 version: 2.1
 
+# orbs:
+  # python: circleci/python@3.1.0
+
 jobs:
   run-tests:
     docker:
@@ -26,7 +29,8 @@ workflows:
   scheduled-tests:
     triggers:
       - schedule:
-          cron: "*/10 * * * *"  # Every 6 hours
+          # cron: "*/10 * * * *"  # Every 6 hours
+          cron: "0,10,20,30,40,50 * * * *" # every 10 minutes
           filters:
             branches:
               only:
