@@ -1,0 +1,25 @@
+image: python:3.11
+
+pipelines:
+  default:
+    - step:
+        name: Run tests on push
+        script:
+          - python -m venv venv
+          - source venv/bin/activate
+          - pip install -r requirements.txt
+          - playwright install
+          - pytest tests/
+
+  schedules:
+    - cron: "0 */2 * * *"   # Every 2 hours (UTC)
+      enabled: true
+      branch: main
+      step:
+        name: Scheduled Test Run
+        script:
+          - python -m venv venv
+          - source venv/bin/activate
+          - pip install -r requirements.txt
+          - playwright install
+          - pytest tests/

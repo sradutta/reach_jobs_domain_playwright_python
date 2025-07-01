@@ -9,7 +9,9 @@ def test_form_present_in_first_job_for_each_page():
         browser = p.chromium.launch(headless=False,args=["--start-maximized"])
         context = browser.new_context()
         page = context.new_page()
-        page.goto("https://mcktrucking.stratasjobs.com/", wait_until="domcontentloaded")
+
+        url = "https://jobs.magnumlog.com/"
+        page.goto(url, wait_until="domcontentloaded")
         time.sleep(2)
 
         if not page.locator("#job-listings-wrapper").is_visible():
@@ -52,7 +54,8 @@ def test_form_present_in_first_job_for_each_page():
                 time.sleep(2)
             except:
                 canadian_consent_text = "Please keep me up to date about job opportunities! I agree to receive automated marketing calls or text messages to the telephone number provided (including prerecorded and/or automated or autodialed calls or text messages), regardless of any previous registration on any Do Not Call list, and marketing emails to the email address provided from or on behalf of"
-                expect(page.locator(".internal-opt-in-statement")).to_contain_text(canadian_consent_text)
+                expect(page.get_by_role("list").filter(has_text="Please keep me up to date")).to_contain_text(
+                    canadian_consent_text)
                 expect(page.get_by_role("button", name="I Agree, Submit")).to_be_visible()
                 page.get_by_role("button", name="I Agree, Submit").click()
                 error_msg = "There was a problem with your submission. Please review the fields below."
