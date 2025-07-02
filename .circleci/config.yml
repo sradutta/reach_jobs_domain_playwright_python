@@ -1,14 +1,17 @@
 version: 2.1
 
-# orbs:
-  # python: circleci/python@3.1.0
+orbs:
+  python: circleci/python@3.1.0
 
 jobs:
-  run-tests:
-    docker:
-      - image: cimg/python:3.11
+  build_and_test:
+    executor: python/default
+    #docker:
+      #- image: cimg/python:3.11
     steps:
       - checkout
+      - python/install-packages:
+          pkg-manager: pip
       - run:
           name: Set up Python & install dependencies
           command: |
@@ -36,4 +39,4 @@ workflows:
               only:
                 - main
     jobs:
-      - run-tests
+      - build_and_test

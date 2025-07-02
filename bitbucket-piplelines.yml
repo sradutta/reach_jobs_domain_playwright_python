@@ -7,9 +7,10 @@ pipelines:
         script:
           - python -m venv venv
           - source venv/bin/activate
-          - pip install -r requirements.txt
+          - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           - playwright install
-          - pytest tests/
+          # - pytest tests/
+          - pytest -v tests/* --junitxml=test-reports/report.xml
 
   schedules:
     - cron: "0 */2 * * *"   # Every 2 hours (UTC)
@@ -20,6 +21,7 @@ pipelines:
         script:
           - python -m venv venv
           - source venv/bin/activate
-          - pip install -r requirements.txt
+          - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           - playwright install
-          - pytest tests/
+          # - pytest tests/
+          - pytest -v tests/* --junitxml=test-reports/report.xml
