@@ -2,7 +2,7 @@ name: Scheduled Playwright Tests
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # Run every 10 minutes (UTC)
+    - cron: '*/10 * * * *'  # Run every 6 hours (UTC)
   workflow_dispatch:        # Enables manual trigger from GitHub UI
 
 jobs:
