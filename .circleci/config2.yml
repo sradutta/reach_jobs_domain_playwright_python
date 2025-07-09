@@ -1,0 +1,46 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@3.1.0
+
+jobs:
+  build_and_test:
+    executors:
+      pw-noble-development:
+        docker:
+          - image: mcr.microsoft.com/playwright/python:v1.52.0-noble
+    #executor: python/default
+    #docker:
+      #- image: cimg/python:3.11
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Set up Python & install dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+            playwright install
+      - run:
+          name: Run Playwright tests
+          command: |
+            . venv/bin/activate
+            pytest tests/ --html=report.html --self-contained-html
+      - store_artifacts:
+          path: report.html
+          destination: test-report
+
+workflows:
+  scheduled-tests:
+    triggers:
+      - schedule:
+          # cron: "*/10 * * * *"  # Every 6 hours
+          cron: "0,10,20,30,40,50 * * * *" # every 10 minutes
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - build_and_test

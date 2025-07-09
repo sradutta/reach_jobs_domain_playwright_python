@@ -1,42 +1,33 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@3.1.0
+  python: circleci/python@2.0.3 # Use the Python orb for common Python tasks
 
 jobs:
-  build_and_test:
-    executor: python/default
-    #docker:
-      #- image: cimg/python:3.11
+  build-and-test:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.40.0-jammy # Use a Playwright-specific Docker image
     steps:
-      - checkout
-      - python/install-packages:
-          pkg-manager: pip
+      - checkout # Checkout your code from version control
       - run:
-          name: Set up Python & install dependencies
+          name: Install Python Dependencies
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-            playwright install
+            pip install -r requirements.txt # Install your project's Python dependencies
       - run:
-          name: Run Playwright tests
+          name: Install Playwright Browsers
           command: |
-            . venv/bin/activate
-            pytest tests/ --html=report.html --self-contained-html
+            playwright install --with-deps # Install Playwright browsers and their dependencies
+      - run:
+          name: Run Playwright Tests
+          command: |
+            pytest tests/test_search.py # Or your preferred test runner, e.g., `python your_test_script.py`
+      - store_test_results:
+          path: test-results/ # Store test results for CircleCI's reporting
       - store_artifacts:
-          path: report.html
-          destination: test-report
+          path: playwright-report/ # Store Playwright reports as artifacts
 
 workflows:
-  scheduled-tests:
-    triggers:
-      - schedule:
-          # cron: "*/10 * * * *"  # Every 6 hours
-          cron: "0,10,20,30,40,50 * * * *" # every 10 minutes
-          filters:
-            branches:
-              only:
-                - main
+  version: 2.1
+  build-and-test-workflow:
     jobs:
-      - build_and_test
+      - build-and-test
