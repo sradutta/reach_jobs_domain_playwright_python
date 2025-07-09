@@ -5,8 +5,8 @@ orbs:
 
 jobs:
   build-and-test:
-    docker:
-      - image: mcr.microsoft.com/playwright:v1.40.0-jammy # Use a Playwright-specific Docker image
+    #docker:
+      #- image: mcr.microsoft.com/playwright:v1.40.0-jammy # Use a Playwright-specific Docker image
     executor: python/default
     steps:
       - checkout # Checkout your code from version control
