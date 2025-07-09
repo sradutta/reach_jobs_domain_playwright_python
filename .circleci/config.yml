@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Run Playwright Tests
           command: |
-            pytest tests/test_search.py # Or your preferred test runner, e.g., `python your_test_script.py`
+            pytest tests/test_pageworking.py # Or your preferred test runner, e.g., `python your_test_script.py`
       - store_test_results:
           path: test-results/ # Store test results for CircleCI's reporting
       - store_artifacts:
