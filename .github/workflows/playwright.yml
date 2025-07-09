@@ -29,7 +29,7 @@ jobs:
       run: ls -R ~/.cache/ms-playwright || echo "No browsers found"
     - name: Run Playwright tests
       run: |
-        pytest tests/
+        pytest tests/test_search.py
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

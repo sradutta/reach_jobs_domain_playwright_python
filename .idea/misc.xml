@@ -3,4 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11 (reach_jobs_domain_playwright_python)" />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (recruiting_admin_new_playwright_python)" project-jdk-type="Python SDK" />
 </project>

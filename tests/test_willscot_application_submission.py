@@ -1,3 +1,15 @@
+'''
+As the name suggests, it navigates to the WillScot page and clicks
+on the first job that is listed on the page. It then fills in the
+form, submit and assert that the form-submission-success-message
+is shown.
+
+Since WillScot's form changes based on license-type, the test loops through
+all the license-types.
+
+This can be a flaky test as form fields might change based on the job.
+'''
+
 import pytest
 from playwright.sync_api import sync_playwright, expect
 import time

@@ -1,3 +1,12 @@
+'''
+As the name suggests, it navigates to the Werner page and clicks
+on the first job that is listed on the page. It then fills in the
+form, submits and asserts that the form-submission-success-message
+is shown.
+
+This can be a flaky test as form fields might change based on the job.
+'''
+
 import pytest
 from playwright.sync_api import Playwright, expect, sync_playwright
 import time

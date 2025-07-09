@@ -1,5 +1,15 @@
-import time
+'''
+This will navigate to the particular URL provided,
+click on the first job that is listed, and navigate
+to the job page. It will then confirm the presence of the form,
+and the consent block. It will also confirm that the
+consent block is not checked. It will then check the consent block,
+and try to submit an empty form to confirm that an error message is
+shown for such an attempt. This test will work for both American and
+Canadian jobs/forms.
+'''
 
+import time
 import pytest
 from playwright.sync_api import expect, sync_playwright, Playwright
 from pathlib import Path
