@@ -39,12 +39,12 @@ workflow:
           # cron: "*/10 * * * *"  # Every 6 hours
           #cron: "0,10,20,30,40,50 * * * *" # every 10 minutes
           cron: "0 0,6,12,18 * * *"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - build-and-test
+          #filters:
+           # branches:
+            #  only:
+             #   - main
+  jobs:
+    - build-and-test
   build-and-test-workflow:
     jobs:
       - build-and-test
