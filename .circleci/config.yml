@@ -31,20 +31,6 @@ jobs:
       - store_artifacts:
           path: playwright-report/ # Store Playwright reports as artifacts
 
-workflow:
-  version: 2.1
-  scheduled-tests:
-    triggers:
-      - schedule:
-          # cron: "*/10 * * * *"  # Every 6 hours
-          #cron: "0,10,20,30,40,50 * * * *" # every 10 minutes
-          cron: "0 0,6,12,18 * * *"
-          #filters:
-           # branches:
-            #  only:
-             #   - main
-  jobs:
-      - build-and-test
   build-and-test-workflow:
     jobs:
       - build-and-test
