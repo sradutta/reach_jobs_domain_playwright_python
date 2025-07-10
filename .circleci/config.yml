@@ -31,7 +31,7 @@ jobs:
       - store_artifacts:
           path: playwright-report/ # Store Playwright reports as artifacts
 
-build-and-test-workflow:
+workflow:
   version: 2.1
   scheduled-tests:
     triggers:
@@ -43,8 +43,8 @@ build-and-test-workflow:
             branches:
               only:
                 - main
-  jobs:
-    - build-and-test
+    jobs:
+      - build-and-test
   build-and-test-workflow:
     jobs:
       - build-and-test
