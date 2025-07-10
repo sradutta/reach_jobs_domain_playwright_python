@@ -44,7 +44,7 @@ workflow:
             #  only:
              #   - main
   jobs:
-    - build-and-test
+      - build-and-test
   build-and-test-workflow:
     jobs:
       - build-and-test
